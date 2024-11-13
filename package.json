@@ -1,0 +1,25 @@
+{
+  "name": "psiborg_assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "env": "^0.0.2",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.7",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.3"
+  }
+}

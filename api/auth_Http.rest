@@ -1,0 +1,119 @@
+# local host url #
+@baseurl=http://localhost:4000
+
+# render cloud url #
+# @baseurl=https://magiquint-backend.onrender.com
+
+# access token #
+@accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGY3YTkxZC05YTgwLTQxOGEtYTYyOC1mNTVmZDM3YzMzNzMiLCJpYXQiOjE3MzE0ODEzMTAsImV4cCI6MTczMTUxNzMxMH0.EeZJNitJHdDYob_MNGpX7eHQ0_1jDlLTV01-GoJe5iE
+
+# refresh token #
+@refreshToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZTU4NDA5MS05MzAxLTQ0ZjQtYjVlMS1mZGQyZjNjNGYyNDkiLCJpYXQiOjE3MzE0NzI1NDUsImV4cCI6MTczNDA2NDU0NX0.-XElapbxiVqlIdHe8w0VwteVDAXznmK9CphykTelZ6w
+
+# hello world #
+###
+GET {{baseurl}}
+
+# create new access token #
+###
+POST {{baseurl}}/refresh/token
+Content-Type: application/json
+Authorization: bearer {{refreshToken}}
+
+## user signup (with userName and Password) for the first time user ##
+###
+POST {{baseurl}}/signup
+Content-Type: application/json
+
+{
+    "userName":"Ankit",
+    "emailId":"ankit@gmail.com",
+    "password":"123456@",
+    "role":"admin"
+}
+
+# login with emailId and password #
+###
+POST {{baseurl}}/login
+Content-Type: application/json
+
+{
+    "emailId":"ksugreev88@gmail.com",
+    "password":"123456@"
+}
+
+# get profile details #
+###
+GET {{baseurl}}/profile
+Authorization: bearer {{accessToken}}
+
+# logout the user #
+###
+POST {{baseurl}}/logout
+Authorization: bearer {{accessToken}}
+
+# get all users #
+###
+GET {{baseurl}}/users
+Authorization: bearer {{accessToken}}
+
+# create a task(only admin can create task) #
+###
+POST {{baseurl}}/task
+Authorization: bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "title": "Complete project documentation",
+  "description": "Write detailed documentation for the project, including API references and setup instructions.",
+  "dueDate": "2024-11-20T00:00:00.000Z",
+  "priority": "High",
+  "assignedTo": "f7caa2f2-efcd-43b3-a845-540f2e3f08ff"
+}
+
+# update task(only admin can create task) #
+###
+PUT {{baseurl}}/task/64b203b2-c2ce-4a73-96fc-b364a76a5f2c
+Authorization: bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "title": "Complete project documentation",
+  "description": "Write detail",
+  # "dueDate": "2024-11-20T00:00:00.000Z",
+  # "priority": "High",
+  "assignedTo": "f7caa2f2-efcd-43b3-a845-540f2e3f08ff"
+}
+
+# get all tasks #
+###
+GET {{baseurl}}/tasks?priority=High
+Authorization: bearer {{accessToken}}
+Content-Type: application/json
+
+# check own tasks user will check #
+###
+GET {{baseurl}}/task?status=Pending
+Authorization: bearer {{accessToken}}
+Content-Type: application/json
+
+# delete the task #
+###
+GET {{baseurl}}/user/task
+Authorization: bearer {{accessToken}}
+
+# delete the task #
+###
+PATCH {{baseurl}}/user/task/64b203b2-c2ce-4a73-96fc-b364a76a5f2c
+Authorization: bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "status":"Completed"
+}
+
+# delete the task #
+###
+DELETE {{baseurl}}/task
+Authorization: bearer {{accessToken}}
+taskId :20e768a8-beec-4bbb-b3f6-ab98b4b45825

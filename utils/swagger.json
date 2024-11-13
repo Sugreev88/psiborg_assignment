@@ -1,0 +1,454 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task Management System",
+    "description": "Task Management System API Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Create a New Profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/userInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/loginInputs"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "user logout via token",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "get profile details",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Task Management (Only For Admin And Managers)"],
+        "summary": "get all registered users only admin and managers can see",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task": {
+      "post": {
+        "tags": ["Task Management (Only For Admin And Managers)"],
+        "summary": "Create New Task",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/createTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created successfully"
+          },
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/{taskId}": {
+      "put": {
+        "tags": ["Task Management (Only For Admin And Managers)"],
+        "summary": "update task",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": "true",
+            "description": "update task by taskId"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/updateTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": ["Task Management (Only For Admin And Managers)"],
+        "summary": "Get All Tasks",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter tasks by status (e.g., Pending, In Progress, Completed)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ownTask",
+            "in": "query",
+            "description": "Filter tasks by ownTask (e.g., true,false)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Filter tasks by ownTask (e.g., Low, Medium, High)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/remove/{taskId}": {
+      "delete": {
+        "tags": ["Task Management (Only For Admin And Managers)"],
+        "summary": "remove task",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": "true",
+            "description": "remove task by taskId"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/user/task": {
+      "get": {
+        "tags": ["User Tasks"],
+        "summary": "get assigned task",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/user/task/{taskId}": {
+      "patch": {
+        "tags": ["User Tasks"],
+        "summary": "update assigned task status",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/updateTaskStatus"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": "true",
+            "description": "update assigned task status by taskId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "in": "header"
+      }
+    }
+  },
+  "definitions": {
+    "userInput": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "required": "true"
+        },
+        "role": {
+          "type": "string"
+        },
+        "emailId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "required": "true"
+        }
+      }
+    },
+    "loginInputs": {
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string",
+          "required": "true"
+        },
+        "password": {
+          "type": "string",
+          "required": "true"
+        }
+      }
+    },
+    "createTask": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "required": "true"
+        },
+        "description": {
+          "type": "string",
+          "required": "true"
+        },
+        "dueDate": {
+          "type": "string",
+          "required": "true"
+        },
+        "priority": {
+          "type": "string",
+          "required": "true"
+        },
+        "assignedTo": {
+          "type": "string",
+          "required": "true"
+        }
+      }
+    },
+    "updateTask": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dueDate": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "assignedTo": {
+          "type": "string"
+        }
+      }
+    },
+    "updateTaskStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["In Progress", "Completed"],
+          "description": "Status of the task. Options are:  In Progress, or Completed."
+        }
+      }
+    }
+  }
+}
