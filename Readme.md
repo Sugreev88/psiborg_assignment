@@ -29,8 +29,8 @@ You can download Node.js [here](https://nodejs.org/) and follow the installation
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-repo-name/psiborg_assignment.git
-   Navigate into the project directory: cd psiborg_assignment
+   git clone https://github.com/Sugreev88/psiborg_assignment.git
+   Navigate into the project directory: cd psiborg_Assignment
    Install all dependencies:npm install
    ```
 
