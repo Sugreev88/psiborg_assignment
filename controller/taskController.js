@@ -8,6 +8,7 @@ const {
   deleteTask_FromDb,
   get_AssignedTasks_FromDb,
   update_AssignedTasks_InDb,
+  getTaskAnalytics_FromDb,
 } = require("../service/taskService");
 
 const {
@@ -120,6 +121,17 @@ const update_AssignedTasks = async function (req, res, next) {
   }
 };
 
+//get task analytics//
+const get_TaskAnalytics = async function (req, res, next) {
+  try {
+    const userId = req.loggedInUserId;
+    const taskAnalytics = await getTaskAnalytics_FromDb(userId);
+    res.status(200).send(taskAnalytics);
+  } catch (error) {
+    errorHandler(error, next);
+  }
+};
+
 module.exports = {
   createTask,
   getTasks,
@@ -127,4 +139,5 @@ module.exports = {
   deleteTask,
   get_AssignedTasks,
   update_AssignedTasks,
+  get_TaskAnalytics,
 };

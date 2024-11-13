@@ -7,6 +7,9 @@
   },
   "servers": [
     {
+      "url": "https://psiborg-assignment.onrender.com"
+    },
+    {
       "url": "http://localhost:4000"
     }
   ],
@@ -335,6 +338,28 @@
             "in": "path",
             "required": "true",
             "description": "update assigned task status by taskId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/analytics": {
+      "get": {
+        "tags": ["User Tasks"],
+        "summary": "Get Task Analytics",
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "responses": {

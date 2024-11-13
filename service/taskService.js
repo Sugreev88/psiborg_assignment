@@ -86,6 +86,27 @@ const update_AssignedTasks_InDb = async function (userId, taskId, status) {
   return;
 };
 
+//get task analytics//
+const getTaskAnalytics_FromDb = async function (userId) {
+  const taskDetails = await Task.find({
+    assignedTo: userId,
+  });
+
+  const completedTasks = taskDetails.filter(
+    (task) => task.status === "Completed"
+  );
+  const inProgressTasks = taskDetails.filter(
+    (task) => task.status === "In Progress"
+  );
+  const pendingTasks = taskDetails.filter((task) => task.status === "Pending");
+  const taskAnalytics = {
+    completedTasks: completedTasks.length,
+    inProgressTasks: inProgressTasks.length,
+    pendingTasks: pendingTasks.length,
+  };
+  return taskAnalytics;
+};
+
 module.exports = {
   createTaskInDb,
   getTasks_FromDb,
@@ -94,4 +115,5 @@ module.exports = {
   deleteTask_FromDb,
   get_AssignedTasks_FromDb,
   update_AssignedTasks_InDb,
+  getTaskAnalytics_FromDb,
 };

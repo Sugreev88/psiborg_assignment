@@ -5,7 +5,7 @@
 # @baseurl=https://magiquint-backend.onrender.com
 
 # access token #
-@accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGY3YTkxZC05YTgwLTQxOGEtYTYyOC1mNTVmZDM3YzMzNzMiLCJpYXQiOjE3MzE0ODEzMTAsImV4cCI6MTczMTUxNzMxMH0.EeZJNitJHdDYob_MNGpX7eHQ0_1jDlLTV01-GoJe5iE
+@accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmN2NhYTJmMi1lZmNkLTQzYjMtYTg0NS01NDBmMmUzZjA4ZmYiLCJpYXQiOjE3MzE0NzU1MzEsImV4cCI6MTczMTUxMTUzMX0.V3e-ETh4_F-HCJC-GBesvqmjD0mXQHeMTrIJ_ZpB6-w
 
 # refresh token #
 @refreshToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZTU4NDA5MS05MzAxLTQ0ZjQtYjVlMS1mZGQyZjNjNGYyNDkiLCJpYXQiOjE3MzE0NzI1NDUsImV4cCI6MTczNDA2NDU0NX0.-XElapbxiVqlIdHe8w0VwteVDAXznmK9CphykTelZ6w
@@ -115,5 +115,11 @@ Content-Type: application/json
 # delete the task #
 ###
 DELETE {{baseurl}}/task
+Authorization: bearer {{accessToken}}
+# taskId :20e768a8-beec-4bbb-b3f6-ab98b4b45825
+
+# delete the task #
+###
+GET {{baseurl}}/task/analytics
 Authorization: bearer {{accessToken}}
 taskId :20e768a8-beec-4bbb-b3f6-ab98b4b45825

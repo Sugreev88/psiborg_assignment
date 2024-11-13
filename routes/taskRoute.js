@@ -7,6 +7,7 @@ const {
   deleteTask,
   get_AssignedTasks,
   update_AssignedTasks,
+  get_TaskAnalytics,
 } = require("../controller/taskController");
 
 const {
@@ -41,5 +42,8 @@ router.route("/user/task").get(verifyLogintoken, get_AssignedTasks);
 
 //update assigned tasks//
 router.route("/user/task/:id").patch(verifyLogintoken, update_AssignedTasks);
+
+//get task analytics//
+router.route("/task/analytics").get(verifyLogintoken, get_TaskAnalytics);
 
 module.exports = router;
